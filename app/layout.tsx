@@ -45,18 +45,18 @@ export default function RootLayout({
             setStartFadeAnimation(true);
       }, 100);
 
-    setTimeout(() => {
-        setStartFadeAnimation(false);
-    }, 1500);
+        setTimeout(() => {
+            setStartFadeAnimation(false);
+        }, 1500);
 
-    setTimeout(() => {
-        setStartAnimation(false);
-    }, 1600);
+        setTimeout(() => {
+            setStartAnimation(false);
+        }, 1600);
 
-    setTimeout(() => {
-        router.push(link);
-    }, 1500);
-  }, []);
+        setTimeout(() => {
+            router.push(link);
+        }, 1500);
+  }, [router]);
 
 
   return (

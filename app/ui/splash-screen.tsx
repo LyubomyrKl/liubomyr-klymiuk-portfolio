@@ -42,9 +42,7 @@ const SplashScreen: React.FC<ISplashScreen>= ({ finishLoading }) => {
             })
     }
 
-    useEffect(() => {
-        animate()
-    }, [])
+    useEffect(animate, [finishLoading])
 
     return (
         <div className={`absolute h-full w-full bottom-0 left-0 bg-app-black flex justify-center items-center`}>

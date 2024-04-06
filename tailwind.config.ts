@@ -85,7 +85,6 @@ const config: Config = {
 
         'timer-blink': {
             '50%': { opacity: '0' },
-            // '50%': { opacity: '1' },
         },
 
         'expand-vertical-line': {

@@ -39,7 +39,7 @@ const DesktopNav: React.FC<INav> = ({onLinkClick}) => {
     const pathname = usePathname();
 
     const renderNavItems = useCallback(() => {
-        return desktopNavItems.map(({label, href}, index) => {
+        return desktopNavItems.map(({label, href}) => {
             return (
                 <div className={`px-5 py-3 mr-2 flex items-center relative` }
                      onClick={() => onLinkClick(href, label)}
@@ -55,7 +55,7 @@ const DesktopNav: React.FC<INav> = ({onLinkClick}) => {
                 </div>
             );
         });
-    }, [pathname]);
+    }, [pathname, onLinkClick]);
 
     return (
         <nav className='flex bg-app-darkgray/95 p-1 rounded-full p-1.5 text-app-white'>
@@ -82,6 +82,12 @@ const MobileNav: React.FC<INav> = ({onLinkClick: onClick}) => {
 
     const activeLabel = useMemo(() => mobileNavItems.find(({href}) => href === pathname)?.label, [pathname]);
 
+    const onLinkClick = useCallback((link: string, label: string) => {
+        onClick(link, label);
+        closeMenu();
+
+    }, [onClick]);
+
     const renderNavItems = useCallback(() => {
         return (
             mobileNavItems.map(({label, href}) => {
@@ -93,12 +99,8 @@ const MobileNav: React.FC<INav> = ({onLinkClick: onClick}) => {
                     )
                 })
         )
-    }, [pathname]);
+    }, [pathname, onLinkClick]);
 
-    const onLinkClick = (href: string, label: string) => {
-        onClick(href, label);
-        closeMenu();
-    }
 
 
     const openMenu = () => {
@@ -148,7 +150,7 @@ const LetsTalkButton = () => {
     return (
         <div className='group px-5 py-3 ml-3 flex items-center relative'>
             <div className='min-w-full rounded-full top-0 left-0 bottom-0 rigth-0 duration-200 absolute bg-app-black hover:bg-black animate-scale-up group-hover:animate-scale-down'></div>
-            <span className='relative pointer-events-none'>Let's talk </span>
+            <span className='relative pointer-events-none'>Let&apos;s talk</span>
             <span className='relative ml-3 animate-shift-left group-hover:animate-shift-right'><ArrowRight/></span>
         </div>
     )
