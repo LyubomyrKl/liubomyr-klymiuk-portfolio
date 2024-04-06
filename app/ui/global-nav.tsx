@@ -84,8 +84,7 @@ const MobileNav: React.FC<INav> = ({onLinkClick: onClick}) => {
 
     const renderNavItems = useCallback(() => {
         return (
-            mobileNavItems.map(({label, href}, index) => {
-                    console.log(pathname === href, pathname, href)
+            mobileNavItems.map(({label, href}) => {
                     return (
                         <div onClick={() => onLinkClick(href, label)} key={href} className={`w-full rounded-3xl flex items-center text-sm  font-semibold ${pathname === href && 'bg-app-gray'}`}>
                             <span className={`ml-5 scale-75 ${pathname != href && 'hidden '} `}><ArrowRight/></span>
@@ -119,7 +118,7 @@ const MobileNav: React.FC<INav> = ({onLinkClick: onClick}) => {
 
 
     return (
-        <nav className={`flex flex-col justify-end items-center bg-app-darkgray/95 p-1  p-1.5 mx-1 text-app-white 
+        <nav className={`flex flex-col justify-end items-center bg-app-darkgray/95 p-1 p-1.5 mx-1 text-app-white 
         rounded-bl-3xl rounded-br-3xl rounded-tl-3xl rounded-tr-3xl h-[60px]
         ${isMenuActive ? 'animate-expand-menu' : 'animate-shrink-menu'}
         
