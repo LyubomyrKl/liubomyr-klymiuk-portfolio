@@ -1,27 +1,37 @@
-import Image from "next/image";
+import React from "react";
+import Timer from "@/app/ui/timer";
+import AnimatedButton from "@/app/ui/animated-button";
+import RadarItem from "@/app/ui/home/radar-item";
+import TechTable from "@/app/ui/home/tech-table";
 
 export default function Home() {
+
+
+
   return (
-    <main className="flex min-h-screen h-8 flex-col items-center justify-between p-24">
+    <main className="max-sm:p-8 max-lg:py-16 max-lg:px-2 max-xl:px-20 py-16 px-24">
 
-      <h1>ABOUT ME</h1>
+            <div className="w-full sm:flex justify-between">
+                <div className='flex flex-col'>
+                    <span className='text-6xl mb-5'>Liubomyr Klymiuk</span>
+                    <span className='text-3xl text-app-text-gray max-sm:mb-6 basis-1'>Web Software Developer</span>
+                </div>
+                <Timer/>
+            </div>
+            <div className='flex flex-col items-center my-96'>
+                <span className=' text-xl'>A plain human being</span>
+                <span className='text-center text-4xl max-sm:text-xl max-sm:mb-10 mb-20'>
+                    with a passion for what he does.
+                </span>
+                <AnimatedButton anchor='#introduction' label={'Introduction'} />
+            </div>
 
-{/*        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>*/}
+        <div id='introduction'>
+            <RadarItem/>
+            <div className='py-12 text-lg'>Discover a comprehensive list of my professional skills</div>
+            <TechTable/>
+        </div>
+
     </main>
   );
 }

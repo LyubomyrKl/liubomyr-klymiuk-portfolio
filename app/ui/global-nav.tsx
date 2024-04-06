@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 
 import React, {useCallback, useMemo, useState} from 'react';
-import Link from "next/link";
+
 import Home from "@/app/ui/svg/home";
 import ArrowRight from "@/app/ui/svg/arrow-right";
 import {useWindowSize} from "@/app/ui/hooks";
@@ -85,9 +85,10 @@ const MobileNav: React.FC<INav> = ({onLinkClick: onClick}) => {
     const renderNavItems = useCallback(() => {
         return (
             mobileNavItems.map(({label, href}, index) => {
+                    console.log(pathname === href, pathname, href)
                     return (
                         <div onClick={() => onLinkClick(href, label)} key={href} className={`w-full rounded-3xl flex items-center text-sm  font-semibold ${pathname === href && 'bg-app-gray'}`}>
-                            <span className={`ml-5 scale-75 ${pathname !== href && 'invisible '} `}><ArrowRight/></span>
+                            <span className={`ml-5 scale-75 ${pathname != href && 'hidden '} `}><ArrowRight/></span>
                             <span className='p-5'>{label}</span>
                         </div>
                     )
@@ -131,7 +132,7 @@ const MobileNav: React.FC<INav> = ({onLinkClick: onClick}) => {
                 </div>
             </div>
             <div className={'flex justify-between w-full h-[50px]'}>
-                <div className='flex items-center relative z-2'>
+                <div className='flex items-center'>
                     <span onClick={isItemActive ? closeMenu : openMenu} className={'flex items-center mr-2 ml-2'}>{isMenuActive ? <Cross/> : <Burger/>}</span>
                     <span>{activeLabel}</span>
                 </div>
@@ -139,6 +140,7 @@ const MobileNav: React.FC<INav> = ({onLinkClick: onClick}) => {
                     <LetsTalkButton/>
                 </div>
             </div>
+            {isItemActive && <div className={'absolute -z-10 h-screen w-screen'} onClick={closeMenu}></div>}
         </nav>
     );
 }

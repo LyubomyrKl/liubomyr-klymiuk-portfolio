@@ -46,7 +46,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${quicksand.className} bg-app-background overflow-hidden`}>
+      <body className={`${quicksand.className} bg-app-background pb-24`}>
         {children}
         <div className='fixed bottom-0 flex items-center min-w-full justify-center left-0 right-0 sm:p-10 py-10'>
             <GlobalNav onLinkClick={navigate}/>

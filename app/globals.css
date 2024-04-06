@@ -61,8 +61,17 @@ input, button, textarea, select{
 
 body, html{
   position: relative;
-  height: 100%;
   scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 a{
@@ -71,4 +80,25 @@ a{
 
 svg{
   display: inline-block;
+}
+
+@keyframes drawRect {
+  from{
+    stroke-dashoffset: 400; /* Start drawing the path from the top left corner */
+  }
+  to {
+    stroke-dashoffset: 0; /* Draw the path completely */
+  }
+}
+
+#animatedRect {
+  stroke-dasharray: 400; /* Total length of the path */
+  stroke-dashoffset: 400; /* Start with the path hidden */
+  animation: drawRect 1s cubic-bezier(.73,.2,.29,.97) forwards; /* Adjust duration and timing function */
+  animation-delay: 2s; /* Add delay before animation starts */
+}
+
+.descriptionItem{
+
+  margin-bottom: 8px;
 }
