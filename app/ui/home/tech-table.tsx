@@ -89,7 +89,7 @@ const TechTable = () => {
 
 
             <div className={'px-10 py-5 relative'}>
-                <div className={`first-vertical-line absolute w-[1px] bg-app-border h-0 top-0 right-0 ${inView ? 'animate-expand-vertical-line-type-2' : ''}`}></div>
+                <div className={`absolute w-[1px] bg-app-border h-0 top-0 right-0 ${inView ? 'animate-expand-vertical-line-type-2' : ''}`}></div>
                 <div className='flex flex-col'>
                     <span className='descriptionItem'>Communication</span>
                     <span className='descriptionItem'>Problem-solving</span>

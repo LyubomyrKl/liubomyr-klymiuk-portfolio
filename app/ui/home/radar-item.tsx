@@ -47,7 +47,6 @@ const RadarItem = () => {
                 <div className={`inner-vertical absolute w-[1px] h-full bg-app-border left-1/2 bottom-0 -translate-x-full ${inView ? 'animate-expand-vertical-line-type-1' : ''}`}></div>
                 <span className='w-full absolute left-0 text-xl font-semibold'>Stack</span>
                 <Radar className='radar relative -z-1 w-2/3' data={data}
-
                        options={{
                            scales: {
                                r: {

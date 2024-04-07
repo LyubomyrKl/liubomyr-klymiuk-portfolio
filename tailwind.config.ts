@@ -9,10 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       keyframes: {
+
         'scale-down': {
           'from': { transform: 'scale(1)' },
           'to': { transform: 'scale(.97)' },
         },
+
         'scale-up': {
           '0%': { transform: 'scale(0.97)' },
           '100%': { transform: 'scale(1)' },
@@ -61,28 +63,6 @@ const config: Config = {
             '100%': { opacity: '0' },
         },
 
-        'popup-route-in': {
-            '0%': {
-                bottom: '0',
-                height: '0',
-            },
-            '100%': {
-                bottom: '0',
-                height: '100vh'
-            },
-        },
-
-        'popup-route-out': {
-            '0%': {
-                top: '0',
-                height: '100vh',
-            },
-            '100%': {
-                top: '0',
-                height: '0',
-            },
-        },
-
         'timer-blink': {
             '50%': { opacity: '0' },
         },
@@ -92,10 +72,9 @@ const config: Config = {
             '100%': { height: '100%' },
         },
 
-
         'expand-horizontal-line': {
             '0%': { width: '0' },
-            '100%': { width: '100%' },
+            '100%': { width: '100%'},
         }
 
       },
@@ -169,7 +148,6 @@ const config: Config = {
               '.animation-delay-3000': {
                   'animation-delay': '3000ms',
               }
-              // Add more delay classes as needed
           };
 
           addUtilities(newUtilities, ['responsive', 'hover']);
