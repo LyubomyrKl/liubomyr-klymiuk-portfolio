@@ -120,7 +120,7 @@ const config: Config = {
         'app-lightgray': '#838383',
         'app-gray': '#757575',
         'app-darkgray': '#4e4e4e',
-        'app-background': 'rgba(239,234,230,0.87)',
+        'app-background': 'rgb(239,234,230)',
       },
       backgroundImage: {
 
