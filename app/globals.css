@@ -62,6 +62,7 @@ input, button, textarea, select{
 body, html{
   position: relative;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar{

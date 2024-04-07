@@ -3,13 +3,11 @@ import Timer from "@/app/ui/timer";
 import AnimatedButton from "@/app/ui/animated-button";
 import RadarItem from "@/app/ui/home/radar-item";
 import TechTable from "@/app/ui/home/tech-table";
-import {useInView} from "react-intersection-observer";
 
 export default function Home() {
 
-
   return (
-    <main className="max-sm:p-8 max-lg:py-16 max-lg:px-2 max-xl:px-20 py-16 px-24">
+    <main className="max-sm:p-8 max-lg:py-16 max-lg:px-2 max-xl:px-20 py-16 px-24 ">
         <div className='min-h-screen '>
             <div className="w-full sm:flex justify-between">
                 <div className='flex flex-col'>
@@ -32,7 +30,9 @@ export default function Home() {
             <RadarItem/>
 
             <div className='py-12 text-lg'>Discover a comprehensive list of my professional skills</div>
-            {/*<TechTable/>*/}
+
+            <TechTable/>
+
         </div>
     </main>
   );

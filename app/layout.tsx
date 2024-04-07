@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect, useLayoutEffect} from "react";
 import type { Metadata } from "next";
 import {quicksand} from "@/app/ui/fonts";
 import GlobalNav from "@/app/ui/global-nav";
@@ -14,10 +14,11 @@ import { useGSAP } from "@gsap/react";
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
 import { TextPlugin } from "gsap/TextPlugin";
 
 
-gsap.registerPlugin(useGSAP,ScrollTrigger,ScrollToPlugin,TextPlugin);
+gsap.registerPlugin(useGSAP, ScrollTrigger, TextPlugin);
 
 export default function RootLayout({
   children,
@@ -36,18 +37,33 @@ export default function RootLayout({
 
     const [isLoading, setIsLoading] = React.useState(true);
 
+
     React.useEffect(() => {
         if (isLoading) {
+            // @ts-ignore
+            bodyRef.current.style.paddingBottom = '0';
             return
         }
+
+        if(bodyRef.current){
+            bodyRef.current.style.removeProperty('padding-bottom');
+        }
+
 
         if(textSplashRef.current){
             textSplashRef.current.style.opacity = '1';
         }
 
+
+        startAnimation();
+
+    }, [isLoading])
+
+
+    const startAnimation = contextSafe(() => {
         const tl = gsap.timeline();
         tl.to(bodyRef.current, {
-            overflow: 'hidden',
+            overflowY: 'hidden',
         })
         .to(splashRef.current, {
             top: 'initial',
@@ -68,12 +84,9 @@ export default function RootLayout({
             ease: "power4.out",
         }, '-=.7')
         .to(bodyRef.current, {
-            overflow: 'visible',
+            overflowY: 'visible',
         })
-
-    }, [isLoading])
-
-
+    })
 
     const navigate = contextSafe((link: string, label:string) => {
 
@@ -87,7 +100,7 @@ export default function RootLayout({
 
         const tl = gsap.timeline();
         tl.to(bodyRef.current, {
-            overflow: 'hidden',
+            overflowY: 'hidden',
         })
         .to(splashRef.current, {
             top: 'initial',
@@ -104,7 +117,7 @@ export default function RootLayout({
         }, '-=1.6')
         .to(textSplashRef.current, {
             text: `${label}.`,
-        })
+        }, '-=1.15')
         .to(textSplashRef.current, {
             opacity: 0,
             duration: .7,
@@ -118,7 +131,7 @@ export default function RootLayout({
             ease: "power4.out",
         }, '-=.7')
         .to(bodyRef.current, {
-            overflow: 'visible',
+            overflowY: 'visible',
         })
 
     })
@@ -126,7 +139,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body ref={bodyRef} className={`${quicksand.className} min-h-screen bg-app-background`}>
+      <body ref={bodyRef} className={`${quicksand.className} min-h-screen bg-app-background sm:pb-3`}>
       {isLoading ? <SplashScreen finishLoading={() => setIsLoading(false)}/> : (
         <>
             {children}
