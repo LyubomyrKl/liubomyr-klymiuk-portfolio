@@ -30,7 +30,7 @@ export default function RootLayout({
 
 
     const splashRef = React.useRef(null);
-    const textSplashRef = React.useRef(null);
+    const textSplashRef = React.useRef<HTMLHeadingElement>(null);
     const bodyRef = React.useRef<HTMLBodyElement>(null);
     const {contextSafe} = useGSAP();
 
@@ -40,6 +40,32 @@ export default function RootLayout({
         if (isLoading) {
             return
         }
+
+        if(textSplashRef.current){
+            textSplashRef.current.style.opacity = '1';
+        }
+
+        const tl = gsap.timeline();
+        tl
+        .to(splashRef.current, {
+            top: 'initial',
+            bottom: '0',
+            height: '100vh',
+            ease: "power4.out",
+        })
+        .to(textSplashRef.current, {
+            opacity: 0,
+            duration: .7,
+            delay: .3,
+        })
+        .to(splashRef.current,{
+            bottom: 'initial',
+            top: '0',
+            height: '0',
+            duration: 1.6,
+            ease: "power4.out",
+        }, '-=.7')
+
     }, [isLoading])
 
 
@@ -88,7 +114,7 @@ export default function RootLayout({
 
     })
 
-
+    console.log(initialTitle)
   return (
     <html lang="en">
       <body ref={bodyRef} className={`${quicksand.className} min-h-screen bg-app-background`}>
@@ -98,7 +124,7 @@ export default function RootLayout({
             <div className='fixed bottom-0 flex items-center min-w-full justify-center left-0 right-0 sm:p-10 py-10'>
                 <GlobalNav onLinkClick={navigate}/>
             </div>
-            <div ref={splashRef} className={`fixed h-[0px] w-full bottom-0 left-0 bg-app-black flex justify-center items-center`}>
+            <div ref={splashRef} className={`fixed h-screen w-full bottom-0 left-0 bg-app-black flex justify-center items-center`}>
                 <h1 ref={textSplashRef} id='splash-title' className={`text-7xl text-app-white opacity-0`}>{initialTitle}.</h1>
             </div>
         </>
