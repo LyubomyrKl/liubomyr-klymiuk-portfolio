@@ -72,6 +72,10 @@ export default function RootLayout({
 
     const navigate = contextSafe((link: string, label:string) => {
 
+        if(link === pathname){
+            return;
+        }
+
         if(bodyRef.current){
             bodyRef.current.style.overflow = 'hidden';
         }
@@ -114,7 +118,7 @@ export default function RootLayout({
 
     })
 
-    console.log(initialTitle)
+
   return (
     <html lang="en">
       <body ref={bodyRef} className={`${quicksand.className} min-h-screen bg-app-background`}>
@@ -125,7 +129,7 @@ export default function RootLayout({
                 <GlobalNav onLinkClick={navigate}/>
             </div>
             <div ref={splashRef} className={`fixed h-screen w-full bottom-0 left-0 bg-app-black flex justify-center items-center`}>
-                <h1 ref={textSplashRef} id='splash-title' className={`text-7xl text-app-white opacity-0`}>{initialTitle}.</h1>
+                <h1 ref={textSplashRef} id='splash-title' className={`max-sm:text-5xl text-7xl text-app-white opacity-0`}>{initialTitle}.</h1>
             </div>
         </>
           )}
