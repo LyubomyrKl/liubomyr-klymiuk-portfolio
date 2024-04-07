@@ -46,7 +46,9 @@ export default function RootLayout({
         }
 
         const tl = gsap.timeline();
-        tl
+        tl.to(bodyRef.current, {
+            overflow: 'hidden',
+        })
         .to(splashRef.current, {
             top: 'initial',
             bottom: '0',
@@ -65,6 +67,9 @@ export default function RootLayout({
             duration: 1.6,
             ease: "power4.out",
         }, '-=.7')
+        .to(bodyRef.current, {
+            overflow: 'visible',
+        })
 
     }, [isLoading])
 

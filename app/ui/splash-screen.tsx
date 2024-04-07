@@ -32,7 +32,7 @@ const SplashScreen: React.FC<ISplashScreen>= ({ finishLoading }) => {
 
     return (
         <div ref={splashRef} className={`absolute h-full w-full bottom-0 left-0 bg-app-black flex justify-center items-center`}>
-            <h1 className={`text-7xl text-app-white`}>{title}.</h1>
+            <h1 className={`max-sm:text-5xl text-7xl text-app-white`}>{title}.</h1>
         </div>
     )
 }

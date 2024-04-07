@@ -18,7 +18,7 @@ export default function Home() {
                 </div>
                 <Timer/>
             </div>
-            <div className='flex flex-col items-center my-96'>
+            <div className='flex flex-col items-center max-sm:my-16 my-96'>
                 <span className=' text-4xl mb-5'>A plain human being</span>
                 <span className='text-center text-6xl max-sm:text-xl max-sm:mb-10 mb-36'>
                     with a passion for what he does.
@@ -32,7 +32,7 @@ export default function Home() {
             <RadarItem/>
 
             <div className='py-12 text-lg'>Discover a comprehensive list of my professional skills</div>
-            <TechTable/>
+            {/*<TechTable/>*/}
         </div>
     </main>
   );
