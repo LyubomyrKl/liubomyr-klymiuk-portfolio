@@ -2,9 +2,9 @@ import React from 'react';
 import {FaLinkedin, FaGoogle, FaGithub} from "react-icons/fa"
 const Page = () => {
     return (
-        <div className="h-screen grid grid-cols-2 ">
+        <div className="h-screen overflow-hidden grid grid-cols-2 ">
             <div className='flex flex-col justify-center max-sm:p-3 p-16 relative'>
-                <h1 className='max-sm:text-4xl text-8xl mb-5'>Contacts</h1>
+                <h1 className='max-sm:text-4xl max-lg:text-6xl text-8xl mb-5'>Contacts</h1>
                 <span className='sm-text-2xl'>Let&apos;s talk 🤝🏻</span>
                 <div className={`absolute w-[1px] bg-app-border h-0 top-0 right-0 animation-delay-3000 animate-expand-vertical-line-type-3`}></div>
             </div>

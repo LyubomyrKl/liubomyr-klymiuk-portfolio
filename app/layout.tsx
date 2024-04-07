@@ -146,7 +146,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body ref={bodyRef} className={`${quicksand.className} min-h-screen bg-app-background sm:pb-3`}>
+      <body ref={bodyRef} className={`${quicksand.className} min-h-screen bg-app-background`}>
       {isLoading ? <SplashScreen finishLoading={() => setIsLoading(false)}/> : (
         <>
             {children}
