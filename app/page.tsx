@@ -8,7 +8,7 @@ export default function Home() {
 
   return (
     <main className="max-sm:p-8 max-lg:py-16 max-lg:px-2 max-xl:px-20 py-16 px-24 ">
-        <div className='min-h-screen '>
+        <div className='md:min-h-screen'>
             <div className="w-full sm:flex justify-between">
                 <div className='flex flex-col'>
                     <span className='text-6xl mb-5'>Liubomyr Klymiuk</span>
@@ -26,13 +26,9 @@ export default function Home() {
         </div>
 
         <div id='introduction'>
-
             <RadarItem/>
-
-            <div className='py-12 text-lg'>Discover a comprehensive list of my professional skills</div>
-
+            <div className=' py-12 text-lg'>Discover a comprehensive list of my professional skills</div>
             <TechTable/>
-
         </div>
     </main>
   );

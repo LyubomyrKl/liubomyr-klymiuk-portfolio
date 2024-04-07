@@ -63,7 +63,8 @@ export default function RootLayout({
     const startAnimation = contextSafe(() => {
         const tl = gsap.timeline();
         tl.to(bodyRef.current, {
-            overflowY: 'hidden',
+            maxHeight: '100vh',
+            overflow: 'hidden',
         })
         .to(splashRef.current, {
             top: 'initial',
@@ -84,7 +85,8 @@ export default function RootLayout({
             ease: "power4.out",
         }, '-=.7')
         .to(bodyRef.current, {
-            overflowY: 'visible',
+            maxHeight: 'initial',
+            overflow: 'visible',
         })
     })
 
@@ -100,7 +102,7 @@ export default function RootLayout({
 
         const tl = gsap.timeline();
         tl.to(bodyRef.current, {
-            overflowY: 'hidden',
+            overflow: 'hidden',
         })
         .to(splashRef.current, {
             top: 'initial',
@@ -115,6 +117,10 @@ export default function RootLayout({
             opacity: 1,
             duration: .7,
         }, '-=1.6')
+        .to(bodyRef.current, {
+            maxHeight: '100vh',
+            overflow: 'hidden',
+        })
         .to(textSplashRef.current, {
             text: `${label}.`,
         }, '-=1.15')
@@ -131,6 +137,7 @@ export default function RootLayout({
             ease: "power4.out",
         }, '-=.7')
         .to(bodyRef.current, {
+            maxHeight: 'initial',
             overflowY: 'visible',
         })
 

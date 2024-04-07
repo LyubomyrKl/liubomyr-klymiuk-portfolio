@@ -20,10 +20,7 @@ const TechTable = () => {
     useGSAP(() => {
 
         if(windowWidth < 1024){
-
             const isMobile = windowWidth < 640;
-            // @ts-ignore
-            console.log((refScroll.current.offsetWidth - windowWidth - (isMobile ? 400 : 200)))
             gsap.to(refScroll.current, {
                 xPercent: -100,
                 ease: "none",
@@ -47,7 +44,8 @@ const TechTable = () => {
             gridTemplateColumns: '3fr 1fr 1fr',
             gridTemplateRows: '1fr 1fr 4fr'
         }}>
-            <div  ref={ref} className={`first-horizontal-line absolute h-[1px] bg-app-border w-[0] top-0 ${inView ? 'animation-delay-1000 animate-expand-horizontal-line-type-4' : ''}`}></div>
+            <div ref={ref} className={'absolute w-full'}></div>
+            <div className={`first-horizontal-line absolute h-[1px] bg-app-border w-[0] top-0 ${inView ? 'animation-delay-1000 animate-expand-horizontal-line-type-4' : ''}`}></div>
             <div className={`second-horizontal-line absolute h-[1px] bg-app-border w-[0] top-[16.5%] right-0 ${inView  ? 'animate-expand-horizontal-line-type-2' : ''}`}></div>
             <div className={`third-horizontal-line absolute h-[1px] bg-app-border w-[0] top-[33%] ${inView ? 'animate-expand-horizontal-line-type-1' : ''}`}></div>
             <div className={`last-horizontal-line absolute h-[1px] bg-app-border w-[0] bottom-0 right-0 ${inView ? 'animate-expand-horizontal-line-type-3' : ''}`}></div>
