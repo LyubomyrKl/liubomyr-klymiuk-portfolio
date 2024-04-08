@@ -118,6 +118,26 @@ svg{
 }
 
 
+.project-title span{
+  box-shadow: inset 0 0 0 0 #222222;
+  padding: 0 .25rem;
+  margin: 0 -.25rem;
+  transition: color .5s ease-in-out, box-shadow .5s ease-in-out;
+}
+.project-title:hover span{
+  color: rgb(239,234,230);
+  box-shadow: inset 800px 0 0 0 #222222;;
+}
+
+.lines{
+  display: none;
+}
+
+
+.project-item:nth-child(1) .lines,
+.project-item:nth-child(2) .lines{
+  display: block;
+}
 
 @media (min-width: 768px) {
   .project-item{
@@ -286,6 +306,11 @@ svg{
 
 
 @media (max-width: 500px) and (min-height: 1000px ) {
+  .project-item:nth-child(1) .project-title,
+  .project-item:nth-child(2) .project-title{
+    font-size: 3rem;
+  }
+
   .project-item:nth-child(3){
 
     left:50%;

@@ -40,6 +40,7 @@ const Page = () => {
 
     return (
         <div className="relative w-full h-screen overflow-hidden">
+
             {items.map((item) => {
                 return (
                     <ProjectItem key={item.title} {...item}/>
@@ -53,10 +54,17 @@ const Page = () => {
 const ProjectItem: React.FC<IProjectItem> = ({title, subtitle, tags, description, link,}) => {
     return (
         <div className={`project-item shadow-2xl border border-app-darkgray bg-app-background flex flex-col justify-center transition-all ease-in-out p-10`}>
+
             <div className={'relative max-md:justify-start h-full w-full flex flex-col justify-center'}>
-                <a href={link} className='project-title'><span>{title}</span></a>
+                <div className='lines absolute h-px w-0 right-0 bottom-2  bg-app-darkgray animate-expand-horizontal-line-type-1 animation-delay-1000'></div>
+
+                <a href={link} className='project-title '>
+                    <span className='relative'><div className='lines absolute h-px w-0 left-0 -bottom-[2px] max-xl:-bottom-[5px] max-sm:-bottom-[2px]   bg-app-darkgray animate-expand-horizontal-line-type-3'></div>
+                        {title}
+                    </span>
+                </a>
                 <h3 className='project-subtitle title text-app-text-gray mb-3'>{subtitle}</h3>
-                <div className={'content'}>
+                <div className={'content relative'}>
                     <p className='mb-4 max-w-screen-sm des'>{description}</p>
                     <div className='max-w-[390px]  flex flex-wrap tags'>
                         {tags.map(tag => (
