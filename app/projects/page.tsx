@@ -1,12 +1,8 @@
-import React from 'react';
+'use client';
+
+import React, {useEffect, useState} from 'react';
 import DescriptionItem from "@/app/ui/description-item";
 
-const Page = () => {
-
-    return (
-        <ProjectItem {...projectItems[0]}/>
-    );
-};
 
 interface IProjectItem {
     title: string;
@@ -15,25 +11,68 @@ interface IProjectItem {
     link: string;
     tags: string[];
 }
-const ProjectItem: React.FC<IProjectItem> = ({title, subtitle, tags, description, link}) => {
+
+
+const Page = () => {
+    const [isRecentlyScrolled, setISRecentlyScrolled] = useState(false);
+    const [items, setItems] = useState(projectItems);
+
+
+    useEffect(() => {
+        const handleScroll = (e: WheelEvent) => {
+            //@ts-ignore
+            if(e.wheelDelta < 0 && !isRecentlyScrolled) {
+                setItems(prevItems => {
+                    return [...prevItems.slice(1), prevItems[0]];
+                });
+                setISRecentlyScrolled(true);
+                setTimeout(() => setISRecentlyScrolled(false), 800); // Adjust the debounce time as needed
+            }
+        }
+
+        window.addEventListener('wheel', handleScroll);
+
+        return () => {
+            window.removeEventListener('wheel', handleScroll);
+        };
+    }, [isRecentlyScrolled]);
+
+
     return (
-        <div className="flex flex-col h-screen p-10">
-            <h1 className='shrink-0'>Here is my own projects</h1>
-            <div className='flex flex-col justify-center flex-grow'>
-                <a href={link} className='text-8xl mb-5 self-start'>{title}</a>
-                <h3 className='text-2xl text-app mb-3'>{subtitle}</h3>
-                <p className='mb-4  max-w-screen-sm'>{description}</p>
-                <div className='max-w-[390px] flex flex-wrap '>
-                    {tags.map(tag => (
-                        <DescriptionItem className={'mr-2 mb-2'} key={tag}>{tag}</DescriptionItem>
-                    ))}
+        <div className="relative w-full h-screen overflow-hidden">
+            {items.map((item) => {
+                return (
+                    <ProjectItem key={item.title} {...item}/>
+                )
+            })}
+        </div>
+    );
+};
+
+
+const ProjectItem: React.FC<IProjectItem> = ({title, subtitle, tags, description, link,}) => {
+    return (
+        <div className={`project-item shadow-2xl border border-app-darkgray bg-app-background flex flex-col justify-center transition-all ease-in-out p-10`}>
+            <div className={'relative max-md:justify-start h-full w-full flex flex-col justify-center'}>
+                <a href={link} className='project-title'><span>{title}</span></a>
+                <h3 className='project-subtitle title text-app-text-gray mb-3'>{subtitle}</h3>
+                <div className={'content'}>
+                    <p className='mb-4 max-w-screen-sm des'>{description}</p>
+                    <div className='max-w-[390px]  flex flex-wrap tags'>
+                        {tags.map(tag => (
+                            <DescriptionItem className={'mr-2 mb-2'} key={tag}>{tag}</DescriptionItem>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
-        );
+    );
 }
 
+
+
 const projectItems: IProjectItem[] = [
+
     {
         title: 'Eve',
         subtitle: 'AI Voice Assistant',
@@ -67,8 +106,9 @@ const projectItems: IProjectItem[] = [
         subtitle: 'My business card',
         description: 'This repository hosts my portfolio, spotlighting my skills, projects, and experiences. It\'s powered by Next.js and styled efficiently with Tailwind CSS. Deployed on Vercel and GitHub Pages, it utilizes Sharp for optimized images, Docker for containerization, and i18n for internationalization support.',
         link: 'https://github.com/LyubomyrKl/Home-Credit---Credit-Risk-Model-Stability',
-        tags: ['Next.js', 'Tailwind CSS', 'Vercel', 'GitHub', 'Sharp', 'Docker', 'i18n']
+        tags: ['Next.js', 'Tailwind CSS', 'GSAP', 'Vercel', 'GitHub', 'Sharp', 'Docker', 'i18n']
     },
 ]
+
 
 export default Page;

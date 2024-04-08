@@ -27,14 +27,12 @@ const TechTable = () => {
                 scrollTrigger: {
                     trigger: isMobile ? refScroll.current : '#introduction',
                     pin: true,
-                    scrub: .3,
+                    scrub: 3,
                     // @ts-ignore
                     end: '+=' + Math.max(150, (refScroll.current.offsetWidth - windowWidth - (isMobile ? 400 : 200))),
                 }
             });
         }
-
-
 
     }, [windowWidth])
 

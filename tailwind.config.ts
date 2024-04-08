@@ -108,6 +108,8 @@ const config: Config = {
         'expand-horizontal-line-type-2': 'expand-horizontal-line 2.7s cubic-bezier(.44,.77,.78,.3) normal forwards',
         'expand-horizontal-line-type-3': 'expand-horizontal-line 6s cubic-bezier(.52,.19,.39,.64) normal forwards',
         'expand-horizontal-line-type-4': 'expand-horizontal-line 5s cubic-bezier(.76,.15,.11,.21) normal forwards',
+
+        'show-content': 'show-content 1s cubic-bezier(.66,.61,.28,.98) normal forwards',
       },
 
       colors: {

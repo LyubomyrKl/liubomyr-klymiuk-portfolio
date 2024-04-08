@@ -17,7 +17,7 @@ export default function Home() {
                 <Timer/>
             </div>
             <div className='flex flex-col items-center max-sm:my-16 my-96'>
-                <span className=' text-4xl mb-5 text-app-text-gray'>A plain human being</span>
+                <span className=' text-4xl mb-5 text-app-text-gray text-center'>A plain human being</span>
                 <span className='text-center text-6xl max-sm:text-xl max-sm:mb-10 mb-36'>
                     with a passion for what he does.
                 </span>
