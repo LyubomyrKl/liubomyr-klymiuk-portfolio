@@ -1,7 +1,6 @@
 'use client';
 
-import React, {useCallback, useEffect, useLayoutEffect} from "react";
-import type { Metadata } from "next";
+import React from "react";
 import {quicksand} from "@/app/ui/fonts";
 import GlobalNav from "@/app/ui/global-nav";
 
@@ -13,7 +12,6 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 import { TextPlugin } from "gsap/TextPlugin";
 
@@ -38,6 +36,36 @@ export default function RootLayout({
     const [isLoading, setIsLoading] = React.useState(true);
 
 
+    const startAnimation = contextSafe(() => {
+        const tl = gsap.timeline();
+        tl.to(bodyRef.current, {
+            maxHeight: '100vh',
+            overflow: 'hidden',
+        })
+            .to(splashRef.current, {
+                top: 'initial',
+                bottom: '0',
+                height: '100vh',
+                ease: "power4.out",
+            })
+            .to(textSplashRef.current, {
+                opacity: 0,
+                duration: .7,
+                delay: .3,
+            })
+            .to(splashRef.current,{
+                bottom: 'initial',
+                top: '0',
+                height: '0',
+                duration: 1.6,
+                ease: "power4.out",
+            }, '-=.7')
+            .to(bodyRef.current, {
+                maxHeight: 'initial',
+                overflow: 'visible',
+            })
+    })
+
     React.useEffect(() => {
         if (isLoading) {
             // @ts-ignore
@@ -60,35 +88,7 @@ export default function RootLayout({
     }, [isLoading])
 
 
-    const startAnimation = contextSafe(() => {
-        const tl = gsap.timeline();
-        tl.to(bodyRef.current, {
-            maxHeight: '100vh',
-            overflow: 'hidden',
-        })
-        .to(splashRef.current, {
-            top: 'initial',
-            bottom: '0',
-            height: '100vh',
-            ease: "power4.out",
-        })
-        .to(textSplashRef.current, {
-            opacity: 0,
-            duration: .7,
-            delay: .3,
-        })
-        .to(splashRef.current,{
-            bottom: 'initial',
-            top: '0',
-            height: '0',
-            duration: 1.6,
-            ease: "power4.out",
-        }, '-=.7')
-        .to(bodyRef.current, {
-            maxHeight: 'initial',
-            overflow: 'visible',
-        })
-    })
+
 
     const navigate = contextSafe((link: string, label:string) => {
 

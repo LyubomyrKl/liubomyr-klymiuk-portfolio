@@ -1,10 +1,15 @@
 import React from 'react';
 
-const DescriptionItem = () => {
+interface IDescriptionItem {
+    children: React.ReactNode;
+    className?: string;
+}
+
+const DescriptionItem: React.FC<IDescriptionItem> = ({children, className}) => {
     return (
-        <div>
-            
-        </div>
+        <span className={`px-3 py-3 border border-app-darkgray rounded-3xl ${className}`}>
+            {children}
+        </span>
     );
 };
 

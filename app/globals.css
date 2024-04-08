@@ -78,6 +78,10 @@ a{
   display: inline-block;
 }
 
+p{
+  display: block;
+}
+
 svg{
   display: inline-block;
 }

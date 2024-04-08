@@ -26,7 +26,7 @@ const Timer = () => {
             <span className='text-[50px] mr-3'>{formattedHours}<span className='animate-timer-blink'>:</span>{formattedMinutes}</span>
             <div className='flex flex-col text-lg'>
                 <span className='font-bold'>{ampm}</span>
-                <span className='text-xl -mt-1'>{month} {day}</span>
+                <span className='text-xl -mt-1 text-app-text-gray'>{month} {day}</span>
             </div>
         </div>
     );
