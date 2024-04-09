@@ -16,7 +16,13 @@ interface IProjectItem {
 const Page = () => {
     const [isRecentlyScrolled, setISRecentlyScrolled] = useState(false);
     const [items, setItems] = useState(projectItems);
-
+    let pageWidth = window.innerWidth || document.body.clientWidth;
+    let threshold = Math.max(1,Math.floor(0.01 * (pageWidth)));
+    let touchstartX = 0;
+    let touchstartY = 0;
+    let touchendX = 0;
+    let touchendY = 0;
+    const limit = Math.tan(45 * 1.5 / 180 * Math.PI);
 
     useEffect(() => {
         const handleScroll = (e: WheelEvent) => {
@@ -30,10 +36,42 @@ const Page = () => {
             }
         }
 
+
+        const handleGesture = (e: TouchEvent) => {
+            let x = touchendX - touchstartX;
+            let y = touchendY - touchstartY;
+            let xy = Math.abs(x / y);
+            let yx = Math.abs(y / x);
+
+            if (Math.abs(x) > threshold || Math.abs(y) > threshold)  {
+                if ((xy <= limit) && (y < 0) ) {
+                    setItems(prevItems => {
+                        return [...prevItems.slice(1), prevItems[0]];
+                    });
+                }
+            }
+        }
+
+        const handleTouchStart = (e: TouchEvent) => {
+            touchstartX = e.changedTouches[0].screenX;
+            touchstartY = e.changedTouches[0].screenY;
+        }
+
+        const handleTouchEnd = (e: TouchEvent) => {
+            touchendX = e.changedTouches[0].screenX;
+            touchendY = e.changedTouches[0].screenY;
+            handleGesture(e);
+        }
+
         window.addEventListener('wheel', handleScroll);
+        window.addEventListener('touchstart', handleTouchStart, false);
+        window.addEventListener('touchend',  handleTouchEnd, false);
 
         return () => {
             window.removeEventListener('wheel', handleScroll);
+            window.removeEventListener('touchstart', handleTouchStart, false);
+            window.removeEventListener('touchend',  handleTouchEnd, false);
+
         };
     }, [isRecentlyScrolled]);
 
