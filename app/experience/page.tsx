@@ -31,7 +31,7 @@ const Page = () => {
 
             const gridRows = gridRowRef.current;
 
-            console.log(gridRows)
+
             if(gridRows){
                 if (idx <= 2) {
                     gridRows[0].style.height = '70%';
@@ -59,6 +59,7 @@ const Page = () => {
     return (
         <div className="w-full h-screen relative">
             <div className="gallery-grid absolute top-1/4 w-full h-3/4 flex flex-col">
+                <h2 className="pl-2 text-4xl ">Temporary in development</h2>
                 {rows.map((row, rowIndex) => (
                     // @ts-ignore
                     <div ref={(el) => (gridRowRef.current[rowIndex] = el)} key={rowIndex} className="row flex min-h-10 grow-[2] shrink">

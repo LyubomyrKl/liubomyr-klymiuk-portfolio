@@ -7,7 +7,7 @@ import TechTable from "@/app/ui/home/tech-table";
 export default function Home() {
 
   return (
-    <main className="max-sm:p-8 max-lg:py-16 max-lg:px-2 max-xl:px-20 p-24 ">
+    <main className="max-sm:p-8 max-lg:py-16 max-lg:px-2 max-xl:px-20 px-24 py-16">
         <div className='md:min-h-screen'>
             <div className="w-full sm:flex justify-between">
                 <div className='flex flex-col'>
@@ -16,8 +16,8 @@ export default function Home() {
                 </div>
                 <Timer/>
             </div>
-            <div className='flex flex-col items-center max-sm:my-16 my-96'>
-                <span className=' text-4xl mb-5 text-app-text-gray text-center'>A plain human being</span>
+            <div className='flex flex-col items-center max-sm:my-16 my-80'>
+                <span className=' text-4xl mb-5 text-app-text-gray text-center'>An ordinary human being</span>
                 <span className='text-center text-6xl max-sm:text-xl max-sm:mb-10 mb-36'>
                     with a passion for what he does.
                 </span>
