@@ -50,7 +50,7 @@ const RadarItem = () => {
                 <div className={`sm:hidden right-0 bottom-0 absolute z-1 h-[1px] w-full bg-app-border ${inView ? 'animate-expand-horizontal-line-type-3' : ''}`}></div>
                 <div className={`sm:hidden right-0 top-0 absolute z-1 h-[1px] w-full bg-app-border  ${inView ? 'animate-expand-horizontal-line-type-2' : ''}`}></div>
                 <span className='w-full max-sm:pl-3 absolute left-0 text-xl font-semibold'>Stack</span>
-                <Radar className='radar relative -z-1 w-2/3' data={data}
+                <Radar className='radar relative -z-1 w-2/3 plпше -px' data={data}
                        options={{
                            scales: {
                                r: {
