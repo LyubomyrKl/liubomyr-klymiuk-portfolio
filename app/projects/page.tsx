@@ -7,7 +7,8 @@ import DescriptionItem from "@/app/ui/description-item";
 interface IProjectItem {
     title: string;
     subtitle: string;
-    description: string;
+    description: string
+
     link: string;
     tags: string[];
 }
@@ -24,13 +25,17 @@ const Page = () => {
     let touchendY = 0;
     const limit = Math.tan(45 * 1.5 / 180 * Math.PI);
 
+    const nextItem = () => {
+        setItems(prevItems => {
+            return [...prevItems.slice(1), prevItems[0]];
+        });
+    }
+
     useEffect(() => {
         const handleScroll = (e: WheelEvent) => {
             //@ts-ignore
             if(e.wheelDelta < 0 && !isRecentlyScrolled) {
-                setItems(prevItems => {
-                    return [...prevItems.slice(1), prevItems[0]];
-                });
+                nextItem();
                 setISRecentlyScrolled(true);
                 setTimeout(() => setISRecentlyScrolled(false), 800); // Adjust the debounce time as needed
             }
@@ -45,9 +50,7 @@ const Page = () => {
 
             if (Math.abs(x) > threshold || Math.abs(y) > threshold)  {
                 if ((xy <= limit) && (y < 0) ) {
-                    setItems(prevItems => {
-                        return [...prevItems.slice(1), prevItems[0]];
-                    });
+                    nextItem();
                 }
             }
         }
@@ -79,19 +82,18 @@ const Page = () => {
     return (
         <div className="relative w-full h-screen overflow-hidden">
 
-            {items.map((item) => {
-                return (
-                    <ProjectItem key={item.title} {...item}/>
-                )
-            })}
+            {items.map((item, index) => <ProjectItem key={item.title} onClick={index > 0 ? nextItem : undefined} {...item}/>)}
         </div>
     );
 };
 
+interface IProjectItemProps extends IProjectItem {
+    onClick?: () => void;
+}
 
-const ProjectItem: React.FC<IProjectItem> = ({title, subtitle, tags, description, link,}) => {
+const ProjectItem: React.FC<IProjectItemProps> = ({title, subtitle, tags, description, link, onClick}) => {
     return (
-        <div className={`project-item shadow-2xl border border-app-darkgray bg-app-background flex flex-col justify-center transition-all ease-in-out p-10`}>
+        <div onClick={onClick} className={`project-item shadow-2xl border border-app-darkgray bg-app-background flex flex-col justify-center transition-all ease-in-out p-10`}>
 
             <div className={'relative max-md:justify-start h-full w-full flex flex-col justify-center'}>
                 <div className='lines absolute h-px w-0 right-0 bottom-2  bg-app-darkgray animate-expand-horizontal-line-type-1 animation-delay-1000'></div>
