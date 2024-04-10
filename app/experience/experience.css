@@ -64,9 +64,10 @@
 
 .typewriter{
     display: flex;
-    max-width: 730px;
+    max-width: 770px;
     margin-left: 20px;
 }
+
 .typewriter h2 {
     overflow: hidden;
     border-right: 2px solid #4e4e4e;

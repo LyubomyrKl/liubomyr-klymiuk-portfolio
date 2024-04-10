@@ -21,6 +21,8 @@ const month = monthNames[currentDate.getMonth()];
 const day = currentDate.getDate();
 
 const Timer = () => {
+
+
     return (
         <div className='flex items-center self-start'>
             <span className='text-[50px] mr-3'>{formattedHours}<span className='animate-timer-blink'>:</span>{formattedMinutes}</span>
