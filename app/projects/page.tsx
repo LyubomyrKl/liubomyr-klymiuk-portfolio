@@ -81,8 +81,7 @@ const Page = () => {
 
     return (
         <div className="relative w-full h-screen overflow-hidden">
-
-            {items.map((item, index) => <ProjectItem key={item.title} onClick={index > 0 ? nextItem : undefined} {...item}/>)}
+            {items.map((item, index) => <ProjectItem key={item.title} onClick={(index === 2) || (index === 3)  ? nextItem : undefined} {...item}/>)}
         </div>
     );
 };
