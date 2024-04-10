@@ -1,102 +1,174 @@
 'use client';
-
-
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useState} from 'react';
+import DescriptionItem from "@/app/ui/description-item";
 
 const Page = () => {
-    const [activeItem, setActiveItem] = useState<number | null>(null);
-    const [expandedItems, setExpandedItems] = useState<number[]>([]);
-    const gridItemsRef = useRef<HTMLDivElement[] | null>([]);
-    const gridRowRef = useRef<HTMLDivElement[] | null>([]);
+    const [activeItem, setActiveItem] = useState<string | null>(null);
+    const [activeRow, setActiveRow] = useState<number | null>(null);
 
-    useEffect(() => {
-        const handleResize = () => {
+    const handleItemClick = useCallback((idx:string, rowIndex: number) => {
+        if(activeItem === idx) {
             setActiveItem(null);
-            setExpandedItems([]);
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    const handleItemClick = (idx:number) => {
+            setActiveRow(null);
+            return;
+        }
         setActiveItem(idx);
-
         if (window.innerWidth > 600) {
-            const activeGroup = getActiveGroup(idx);
-            setExpandedItems(activeGroup);
-
-            const gridRows = gridRowRef.current;
-
-
-            if(gridRows){
-                if (idx <= 2) {
-                    gridRows[0].style.height = '70%';
-                    gridRows[1].style.height = '30%';
-                } else {
-                    gridRows[0].style.height = '30%';
-                    gridRows[1].style.height = '70%';
-                }
-            }
+            setActiveRow(rowIndex)
         }
-    };
-
-    const getActiveGroup = (idx: number) => {
-        if (idx === 0 || idx === 3) {
-            return [0, 3];
-        } else if (idx === 1 || idx === 4) {
-            return [1, 4];
-        } else if (idx === 2 || idx === 5) {
-            return [2, 5];
-        }
-        return [];
-    };
-
+    }, [activeItem]);
 
     return (
-        <div className="w-full h-screen relative">
-            <div className="gallery-grid absolute top-1/4 w-full h-3/4 flex flex-col">
-                <h2 className="pl-2 text-4xl ">Temporary in development</h2>
-                {rows.map((row, rowIndex) => (
-                    // @ts-ignore
-                    <div ref={(el) => (gridRowRef.current[rowIndex] = el)} key={rowIndex} className="row flex min-h-10 grow-[2] shrink">
-                        {row.map((item, index) => (
-                            <div    // @ts-ignore
-                                ref={(el) => (gridItemsRef.current[rowIndex * row.length + index] = el)}
-                                key={index}
-                                className={`grid-item${index === row.length - 1 ? ' end' : ''} ${activeItem === rowIndex * row.length + index ? 'active' : ''} ${expandedItems.includes(rowIndex * row.length + index) ? 'expanded' : ''}`}
-                                onClick={() => handleItemClick(rowIndex * row.length + index)}>
-                                <div className="experience-title">
-                                    <h2 className='text-lg uppercase tracking-[1px] '>{item.category}<span className='text-[10px]'>{item.number}</span></h2>
-                                    <h5 className='text-sm absolute bottom-0'>{item.details}</h5>
-                                </div>
-                                <div className="img-wrap">
-                                    <div className="img">
-                                        text
-                                    </div>
-                                </div>
+        <div className="w-full h-screen relative flex flex-col pt-5">
+
+            <div className='relative pb-10'>
+                <div className="typewriter">
+                    <h2 className="sm:text-xl md:text-2xl lg:text-4xl ">Web Software developer since 2020</h2>
+                </div>
+                    <p className='text-sm mt-4 px-5 md:text-lg'>
+                        I have deep knowledge of JavaScript/TypeScript, especially React, Redux/RTL.
+                        I also have experience with React Native and Angular.
+                        Beside that, I have broad experience in Antd/MUI,
+                        Styled-components/CSS-in-JS/Preprocessors as styles
+                        React-testing-library/Jest. Has familiarity with Docker
+                    </p>
+                <div className='absolute w-0 h-px bg-app-darkgray bottom-0 animate-expand-horizontal-line-type-3'></div>
+            </div>
+            <div className='px-3 py-2 md:px-24 w-full flex justify-end items-center  md:h-24'>
+                <span className='text-right md:text-lg'>That&apos;s only main projects</span>
+            </div>
+            <div className='relative grow'>
+                <div className="gallery-grid h-[300%] md:h-full w-full flex flex-col">
+                    {experienceItems.map((row, rowIndex) => (
+                        <div
+                            key={rowIndex}
+                            className={`row-item max-w-screen-md:flex-col flex min-h-10 grow-[2] shrink
+                            ${activeRow === null ? 'md:h-[50%]' : rowIndex === activeRow ? 'md:h-[70%]' : 'md:h-[30%]'}`}
+                        >
+                            <div className={`absolute w-0 h-px bg-app-darkgray animation-delay-1500 
+                                ${rowIndex === 1 ? 'animate-expand-horizontal-line-type-3 right-0' : 'animate-expand-horizontal-line-type-4'}`}>
                             </div>
-                        ))}
-                    </div>
-                ))}
+                            {row.map((item) => (
+                                <ExperienceItem
+                                    key={item.title}
+                                    {...item}
+                                    activeItem={activeItem}
+                                    handleItemClick={() => handleItemClick(item.title, rowIndex)}
+                                />
+                            ))}
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
 };
 
-const rows = [
+
+interface IExperienceItemProps extends IExperienceItem{
+    activeItem: string | null;
+    handleItemClick: () => void;
+}
+// handleItemClick(item.title, rowIndex)
+// index !== row.length - 1
+const ExperienceItem: React.FC<IExperienceItemProps> = ({
+    title,
+    subtitle,
+    details,
+    line,
+    tags,
+    activeItem,
+    handleItemClick,
+}) => {
+    return (
+        <div
+            key={title}
+            className={`grid-item ${activeItem === title  ? 'active' : ''}`}
+            onClick={handleItemClick}
+        >
+            {line}
+            <div className="experience-title">
+                <h2 className='text-lg md:text-xl uppercase tracking-[1px]'>{title}</h2>
+                <h5 className='max-w-screen-md:text-sm absolute bottom-2'>{subtitle}</h5>
+            </div>
+            <div className="img-wrap text-sm lg:text-lg ">
+                <div className='img p-10'>
+                    <div className='mb-5'>
+                        {details}
+                    </div>
+                    <div>
+                        {tags?.map(tag => (
+                            <DescriptionItem className={'py-1 mr-3 mb-3'} key={tag}>
+                                {tag}
+                            </DescriptionItem>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    )
+}
+
+interface IExperienceItem {
+    title: string;
+    subtitle: string;
+    details: string;
+    tags?: string[];
+    line?: React.ReactNode[];
+}
+
+const experienceItems: IExperienceItem[][] = [
     [
-        { category: "Moutains", number: "(01)", details: "Details" },
-        { category: "Architecture", number: "(02)", details: "Details" },
-        { category: "Abstract", number: "(03)", details: "Details" }
+        { title: "CRM System", subtitle: 'CRM System',
+            details:
+                "Front-End Developer leading CRM system development for key automotive and real estate projects in the US market at Abetter.bid/IAAI/SCA. Skilled in React, Redux/RTK/RTK Query, and Ant Design (Antd), I create responsive interfaces, conduct rigorous testing with React Testing Library (RTL), and ensure browser compatibility. " +
+                "I implement new features like real-time data updates, enhanced accessibility, and optimized user interfaces for diverse devices.",
+            tags: ['React', 'Redux', 'RTK', 'RTL', 'Jest', 'Ant Design'],
+            line: [
+                <div key={1} className={`vertical-line absolute w-px h-0 right-0 bottom-0 bg-app-darkgray animation-delay-2500 animate-expand-vertical-line-type-2`}></div>,
+                <div key={2} className='horizontal-line absolute h-px w-0 animate-expand-horizontal-line-type-3 bottom-0 bg-app-darkgray right-0'></div>
+            ]
+        },
+        { title: "A Better Bid/SCA/IAAI", subtitle: 'Bid Car Auction',
+            details: "We were developing a number of major projects in the automotive business, including real-time auto auctions and real estate business in the US market.",
+            tags: ['Vue', 'Vuex', 'Vuetify', 'Jest', 'jQuery', 'PHP', 'Elastic'],
+            line: [
+                <div key={1} className={`vertical-line absolute w-px h-0 right-0 top-0 bg-app-darkgray animate-expand-vertical-line-type-1`}></div>,
+                <div key={2} className='horizontal-line absolute h-px w-0 animate-expand-horizontal-line-type-1 bottom-0 bg-app-darkgray left-0'></div>
+            ]
+        },
+
+        { title: "Business Brokers", subtitle: 'NDA', details: "Serves matches businesses with buyers, handling all aspects of the process " +
+                "from marketing to legal requirements.",
+            tags: ['Angular', 'Formik']
+        },
     ],
     [
-        { category: "Winter", number: "(04)", details: "Details" },
-        { category: "Urban", number: "(05)", details: "Details" },
-        { category: "Commute", number: "(06)", details: "Details" }
+        { title: "Healthcare", subtitle: 'NDA', details: "A healthcare system that offers the capability to track patients" +
+                "gather statistics, and monitor progress in health management.",
+            tags: ['React', 'Redux', 'RTK', 'RTL', 'Jest', 'Chart.js', 'Material-UI'],
+            line: [
+                <div key={1} className={`vertical-line absolute w-px h-0 right-0 bottom-0 bg-app-darkgray animate-expand-vertical-line-type-2`}></div>,
+                <div key={2} className='horizontal-line absolute h-px w-0 animate-expand-horizontal-line-type-2 bottom-0 bg-app-darkgray left-0'></div>
+            ]
+        },
+        { title: "CRM Chrome Extension", subtitle: 'Extension', details: "Improve CRM experience with Chrome Extension, offering seamless " +
+                "integration and enhanced functionality for efficient client management.",
+            tags: ['React', 'Redux-persist', 'RTK', 'RTL', 'Jest', 'Ant Design'],
+            line: [
+                <div key={1} className={`vertical-line absolute w-px h-0 right-0 animation-delay-3000 top-0 bg-app-darkgray animate-expand-vertical-line-type-3`}></div>,
+                <div key={2} className='horizontal-line absolute h-px w-0 animate-expand-horizontal-line-type-4 bottom-0 bg-app-darkgray right-0'></div>
+
+            ]
+        },
+        { title: "Survey", subtitle: 'NDA', details: "I've had the opportunity to work on an online service for surveys in the Sociology/Education domain, leveraging Qualtrics as the base platform. The project involved integrating rich text libraries, dynamic components, and charts, all infused with super interactive animations. " +
+                "Despite the complexity of that project the performance optimization helped to provide smooth UX.",
+            tags: ['React', 'Redux', 'RTK', 'RTL', 'Jest', 'Chart.js', 'Ant Design', 'Fomik', 'Lottie', 'Yup', 'Styled Components'],
+            line: [
+                <div key={1} className='horizontal-line absolute h-px w-0 animate-expand-horizontal-line-type-4 bottom-0 bg-app-darkgray left-0'></div>
+            ]
+        }
     ]
 ];
 

@@ -44,7 +44,7 @@ const config: Config = {
         'expand': {
             '0%': { width: '80%', height: '60px' },
             '50%': { width: '100%', height: '60px' },
-            '100%': { width: '100%', height: '270px'},
+            '100%': { width: '100%', height: '320px'},
         },
 
         'shrink': {
@@ -123,12 +123,6 @@ const config: Config = {
         'app-gray': '#757575',
         'app-darkgray': '#4e4e4e',
         'app-background': 'rgb(239,234,230)',
-      },
-      backgroundImage: {
-
-        // "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        // "gradient-conic":
-        //   "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },

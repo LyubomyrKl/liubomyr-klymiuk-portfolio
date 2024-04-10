@@ -1,49 +1,31 @@
-
-
-
 .gallery-grid{
     transition: all 1s ease-in-out;
 }
 
-.row{
-    transition: 0.3s;
+.row-item{
+    transition: height 0.3s ease-in-out;
 }
-
-
 
 .grid-item{
     position: relative;
     height: 100%;
-    border-top: 1px solid #4e4e4e;
-    border-right: 1px solid #4e4e4e;
     flex: 1;
     cursor: pointer;
-    transition: 0.3s;
+    transition: .8s;
     display: flex;
     will-change: flex;
     padding: 10px;
     overflow: hidden;
 }
-.grid-item>div{
-    position: relative;
-    pointer-events: none;
+
+.grid-item .horizontal-line {
+    display: none;
 }
 
 .active{
     flex: 4;
 }
-.expanded{
-    flex: 4;
-}
 
-.end{
-    border-right: none;
-}
-
-.experience-title {
-    flex: 2;
-    overflow: hidden;
-}
 
 .img-wrap {
     flex: 0;
@@ -51,51 +33,95 @@
     overflow: hidden;
 }
 
-.grid-item.active > .experience-title {
-    flex: 2;
+.img {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    filter: blur(10px);
 }
 
 .grid-item.active > .img-wrap {
     flex: 6;
 }
 
-.img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    transform: scale(1.5);
-    opacity: 0;
-}
 
 .grid-item.active > .img-wrap > .img {
-    transform: scale(1);
+    top: 0;
     filter: blur(0px);
     opacity: 1;
-    transition: 1s;
+    transition: all 1s ease-out;
+    transition-delay: 0.25s;
 }
 
-@media screen and (max-width: 600px) {
+
+.typewriter{
+    display: flex;
+    max-width: 730px;
+    margin-left: 20px;
+}
+.typewriter h2 {
+    overflow: hidden;
+    border-right: 2px solid #4e4e4e;
+    white-space: nowrap;
+    letter-spacing: .12em;
+    animation:blink-caret .75s step-end infinite;
+    font-weight: 600;
+}
+
+@media screen and (min-width: 900px) {
+    .typewriter h2{
+
+        animation: typing 4s steps(44) 1s 1 normal both
+    }
+}
+
+/* The typing effect */
+@keyframes typing {
+    0% { width: 0 }
+    100% { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #4e4e4e; }
+}
+
+
+@media screen and (max-width: 900px) {
     .header {
         height: 15%;
         padding: 20px;
     }
 
-    .gallery-grid {
-        top: 15%;
-        height: 85%;
+    .gallery-grid{
+        padding-bottom: 120px;
     }
 
-    .gallery-grid .row {
+    .gallery-grid .row-item {
         flex-direction: column;
     }
 
     .grid-item {
+        height: fit-content;
         border-right: none;
     }
 
+    .grid-item .vertical-line{
+        display: none;
+    }
+
+    .grid-item .horizontal-line {
+        display: block;
+    }
 }
+
 

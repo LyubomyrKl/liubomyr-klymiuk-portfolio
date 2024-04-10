@@ -1,9 +1,9 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
+
 
 import React, {useCallback, useMemo, useState} from 'react';
-
+import { usePathname } from 'next/navigation'
 import Home from "@/app/ui/svg/home";
 import ArrowRight from "@/app/ui/svg/arrow-right";
 import {useWindowSize} from "@/app/ui/hooks";
@@ -19,6 +19,10 @@ const desktopNavItems = [
         label: 'Experience',
         href: '/experience'
     },
+    {
+        label: 'Resume',
+        href: '/Liubomyr_Klymiuk_CV.pdf'
+    }
 ]
 
 
@@ -120,7 +124,7 @@ const MobileNav: React.FC<INav> = ({onLinkClick: onClick}) => {
 
 
     return (
-        <nav className={`flex flex-col justify-end items-center bg-app-darkgray/95 p-1 p-1.5 mx-1 text-app-white 
+        <nav className={`flex flex-col justify-end items-center bg-app-darkgray/95 p-1.5 mx-1 text-app-white 
         rounded-bl-3xl rounded-br-3xl rounded-tl-3xl rounded-tr-3xl h-[60px]
         ${isMenuActive ? 'animate-expand-menu' : 'animate-shrink-menu'}
         
