@@ -26,18 +26,21 @@ const Page = () => {
     const limit = Math.tan(45 * 1.5 / 180 * Math.PI);
 
     const nextItem = () => {
-        setItems(prevItems => {
-            return [...prevItems.slice(1), prevItems[0]];
-        });
+        if(!isRecentlyScrolled){
+            setItems(prevItems => {
+                return [...prevItems.slice(1), prevItems[0]];
+            });
+            setISRecentlyScrolled(true);
+            setTimeout(() => setISRecentlyScrolled(false), 800); // Adjust the debounce time as needed
+        }
+
     }
 
     useEffect(() => {
         const handleScroll = (e: WheelEvent) => {
             //@ts-ignore
-            if(e.wheelDelta < 0 && !isRecentlyScrolled) {
+            if(e.wheelDelta < 0 ) {
                 nextItem();
-                setISRecentlyScrolled(true);
-                setTimeout(() => setISRecentlyScrolled(false), 800); // Adjust the debounce time as needed
             }
         }
 
