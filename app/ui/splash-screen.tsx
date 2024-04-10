@@ -12,7 +12,7 @@ interface ISplashScreen {
 
 const SplashScreen: React.FC<ISplashScreen>= ({ finishLoading }) => {
     const pathname = usePathname();
-    const title = pathname === '/' ? 'Home' : pathname === '/projects' ? 'Projects' : pathname === '/experience' ? 'Experience' : 'About';
+    const title = pathname === '/' ? 'Home' : pathname === '/projects' ? 'Projects' : pathname === '/experience' ? 'Experience' : 'Contacts';
     const splashRef = React.useRef(null);
 
     const animate = () => {

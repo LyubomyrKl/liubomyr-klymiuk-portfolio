@@ -155,7 +155,7 @@ export default function RootLayout({
       {isLoading ? <SplashScreen finishLoading={() => setIsLoading(false)}/> : (
         <>
             {children}
-            <div className='fixed bottom-0 flex items-center max-w-[570px] m-auto justify-center left-0 right-0  py-10'>
+            <div className='fixed bottom-0 flex items-center max-w-[600px] m-auto justify-center left-0 right-0  py-10'>
                 <GlobalNav onLinkClick={navigate}/>
             </div>
             <div ref={splashRef} className={`fixed h-screen w-full bottom-0 left-0 bg-app-black flex justify-center items-center`}>
